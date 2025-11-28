@@ -17,9 +17,12 @@ const app = express();
 
 const __dirname = path.resolve(); // it means root directory of project
 
+import cors from "cors";
+
 const allowedOrigins = [
   "http://localhost:5173",
   "https://kartly-6487b.web.app",
+  "https://kartly-6487b.firebaseapp.com",
 ];
 
 app.use(
@@ -31,8 +34,11 @@ app.use(
       return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 
 
 // Middleware to parse JSON and URL-encoded data
