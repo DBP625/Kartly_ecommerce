@@ -8,7 +8,7 @@ This project is structured and written with production-readiness in mind: clean 
 ## 🚀 Live Deployment
 
 ### 👉 **Try the Live App**  
-🔗 **https://e-commerce-store-4vem.onrender.com/**
+🔗 **[https://e-commerce-store-4vem.onrender.com/](https://kartly-6487b.web.app/)**
 
 ---
 
