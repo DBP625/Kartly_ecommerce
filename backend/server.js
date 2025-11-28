@@ -19,7 +19,7 @@ const __dirname = path.resolve(); // it means root directory of project
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Your frontend URL
+    origin: "https://kartly-6487b.web.app/", // Your frontend URL
     credentials: true, // Allow cookies to be sent
   }),
 );
