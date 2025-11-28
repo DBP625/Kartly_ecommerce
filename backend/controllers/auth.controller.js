@@ -4,7 +4,7 @@ import { redis } from "../database/redis.js";
 import admin from "../database/firebase.admin.js";
 import crypto from "crypto";
 // import { sendResetEmail } from "../lib/nodemailer.js";
-
+const isProd = process.env.NODE_ENV === "production";
 const generateTokens = (userId) => {
   const accessToken = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: "15m",
@@ -26,13 +26,13 @@ const setCookie = (res, accessToken, refreshToken) => {
   res.cookie("accessToken", accessToken, {
     httpOnly: true, //PREVENT CLIENT SIDE JS ACCESSING THE COOKIE, cross-site scripting (XSS) protection
     secure: process.env.NODE_ENV === "production", //ONLY SEND COOKIE OVER HTTPS IN PRODUCTION
-    sameSite: "Strict", //PREVENT CSRF ATTACKS BY NOT SENDING COOKIES WITH CROSS-SITE REQUESTS
+    sameSite: isProd ? "none" : "strict",, //PREVENT CSRF ATTACKS BY NOT SENDING COOKIES WITH CROSS-SITE REQUESTS
     maxAge: 15 * 60 * 1000, //15 MINUTES
   });
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "Strict",
+    sameSite: isProd ? "none" : "strict",,
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 DAYS
   });
 };
