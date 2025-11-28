@@ -17,7 +17,6 @@ const app = express();
 
 const __dirname = path.resolve(); // it means root directory of project
 
-import cors from "cors";
 
 const allowedOrigins = [
   "http://localhost:5173",
