@@ -17,12 +17,23 @@ const app = express();
 
 const __dirname = path.resolve(); // it means root directory of project
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://kartly-6487b.web.app",
+];
+
 app.use(
   cors({
-    origin: "https://kartly-6487b.web.app/", // Your frontend URL
-    credentials: true, // Allow cookies to be sent
-  }),
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  })
 );
+
 
 // Middleware to parse JSON and URL-encoded data
 app.use(express.json({ limit: "50mb" })); // Parse JSON request bodies with 50mb limit
